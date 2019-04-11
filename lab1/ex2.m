@@ -5,7 +5,7 @@
 
 clc;clear;close all;
 
-data = load("data\DataSet\NominalUERE\dataset_1_20180328T122038.mat");
+data = load("data\DataSet\NominalUERE\dataset_2_20180328T122158.mat");
 satellite = data.RHO.GPS;
 earth_fixed_pos = data.SAT_POS_ECEF.GPS;
 col = size(satellite,2);
