@@ -5,18 +5,18 @@
 
 clc;clear;close all;
 
-data = load("data\DataSet\NominalUERE\dataset_2_20180328T122158.mat");
-satellite = data.RHO.GPS;
-earth_fixed_pos = data.SAT_POS_ECEF.GPS;
-col = size(satellite,2);
-row = size(satellite,1);
-time_instant = zeros(1,col);
+data = load("data\DataSet\NominalUERE\dataset_1_20180328T122038.mat");
+satellite = data.RHO.GPS;  % choosing the costellation
+earth_fixed_pos = data.SAT_POS_ECEF.GPS;  % reference
+col = size(satellite,2);  % time dimension 3600
+row = size(satellite,1);  % number of satellite 
+time_instant = zeros(1,col);  % time init
 
 %LMS
 
-rng('default')
-K =10;
-array=zeros(col,4);
+rng('default')  % random number generator
+K =10;  % interation param we can choose
+array=zeros(col,4);  % array init for estimations
 
 for i = 1:col %epoc
     index = find(not(isnan(satellite(:,i))));
@@ -28,7 +28,7 @@ for i = 1:col %epoc
     H(:,4) = 1;
     
     for k = 1:K
-        for j = 1:length(index)%visible satellite
+        for j = 1:length(index) % visible satellite
             xyz = earth_fixed_pos(index(j)).pos(i,:);
             rho_hat(j)=sqrt((xyz(1)-x_hat(1))^2 + (xyz(2)-x_hat(2))^2+(xyz(3)-x_hat(3))^2);
             H(j,1) = (xyz(1)-x_hat(1))/ rho_hat(j);
