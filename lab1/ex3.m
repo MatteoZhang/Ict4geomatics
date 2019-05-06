@@ -1,6 +1,22 @@
 clc;clear;close all;
+format short
 
-data = load("data\DataSet\NominalUERE\dataset_1_20180328T122038.mat");
+% Nominal UERE
+data = load("dataset_1_20180328T122038.mat");
+% data = load("dataset_2_20180328T122158.mat");
+% data = load("dataset_3_20180328T121914.mat");
+% data = load("dataset_4_20180328T121804.mat");
+% data = load("dataset_5_20180328T121529.mat");
+% data = load("dataset_6_20180328T121701.mat");
+
+% Realistical UERE
+% data = load("dataset_1_20180329T160947.mat");
+% data = load("dataset_2_20180329T160900.mat");
+% data = load("dataset_3_20180329T161023.mat");
+% data = load("dataset_4_20180329T161103.mat");
+% data = load("dataset_5_20180329T161418.mat");
+% data = load("dataset_6_20180329T161139.mat");
+
 satellite = data.RHO.GPS;  % choosing the costellation
 earth_fixed_pos = data.SAT_POS_ECEF.GPS;  % reference
 col = size(satellite,2);  % time dimension 3600
@@ -48,9 +64,6 @@ std_xyz_GPS(1,3) = std(array(:,3))
 
 satellite = data.RHO.GLO;  % choosing the costellation
 earth_fixed_pos = data.SAT_POS_ECEF.GLO;  % reference
-col = size(satellite,2);  % time dimension 3600
-row = size(satellite,1);  % number of satellite 
-time_instant = zeros(1,col);  % time init
 
 %LMS
 
@@ -86,9 +99,6 @@ std_xyz_GLO(1,3) = std(array(:,3))
 
 satellite = data.RHO.BEI;  % choosing the costellation
 earth_fixed_pos = data.SAT_POS_ECEF.BEI;  % reference
-col = size(satellite,2);  % time dimension 3600
-row = size(satellite,1);  % number of satellite 
-time_instant = zeros(1,col);  % time init
 
 %LMS
 
@@ -124,9 +134,6 @@ std_xyz_BEI(1,3) = std(array(:,3))
 
 satellite = data.RHO.GAL;  % choosing the costellation
 earth_fixed_pos = data.SAT_POS_ECEF.GAL;  % reference
-col = size(satellite,2);  % time dimension 3600
-row = size(satellite,1);  % number of satellite 
-time_instant = zeros(1,col);  % time init
 
 %LMS
 
@@ -159,5 +166,3 @@ end
 std_xyz_GAL(1,1) = std(array(:,1));
 std_xyz_GAL(1,2) = std(array(:,2));
 std_xyz_GAL(1,3) = std(array(:,3))
-
-% fare grafico per 

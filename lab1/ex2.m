@@ -1,11 +1,22 @@
-%dx = (H'H)^(-1)H'dp
-%dp_hat = p_hat - p
-%x_hat(1) = x_hat(-1) + dx
-%db = 0 bias on the clock for our dataset
-
+% recursive LMS calculation
 clc;clear;close all;
 
-data = load("data\DataSet\NominalUERE\dataset_1_20180328T122038.mat");
+% Nominal UERE
+data = load("dataset_1_20180328T122038.mat");
+% data = load("dataset_2_20180328T122158.mat");
+% data = load("dataset_3_20180328T121914.mat");
+% data = load("dataset_4_20180328T121804.mat");
+% data = load("dataset_5_20180328T121529.mat");
+% data = load("dataset_6_20180328T121701.mat");
+
+% Realistical UERE
+% data = load("dataset_1_20180329T160947.mat");
+% data = load("dataset_2_20180329T160900.mat");
+% data = load("dataset_3_20180329T161023.mat");
+% data = load("dataset_4_20180329T161103.mat");
+% data = load("dataset_5_20180329T161418.mat");
+% data = load("dataset_6_20180329T161139.mat");
+
 satellite = data.RHO.GPS;  % choosing the costellation
 earth_fixed_pos = data.SAT_POS_ECEF.GPS;  % reference
 col = size(satellite,2);  % time dimension 3600
@@ -43,5 +54,5 @@ for i = 1:col %epoc
 end
 
 lla = ecef2lla(x_hat(1:3))
-writeKML_GoogleEarth('file',lla(1),lla(2),lla(3))
+writeKML_GoogleEarth('x_approx',lla(1),lla(2),lla(3))
 
