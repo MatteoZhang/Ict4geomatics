@@ -17,7 +17,6 @@ A=zeros(36,7);
 L0 = zeros(36,1);
 j=1;
 for i = 1:3:36
-    
     A(i,:) = [1 0 0 Xa(j) 0 -Za(j) Ya(j)];
     A(i+1,:) = [0 1 0 Ya(j) -Za(j) 0 -Xa(j)];
     A(i+2,:) = [0 0 1 Za(j) Ya(j) Xa(j) 0];
